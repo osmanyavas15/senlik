@@ -56,7 +56,6 @@ export default function Home() {
       <nav className="bg-gray-900 bg-opacity-95 backdrop-blur-md border-b border-gray-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
             <div className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">
               Senlik
             </div>
@@ -86,18 +85,11 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Right side icons */}
+            {/* Right Icons */}
             <div className="hidden md:flex items-center space-x-6">
-              <button className="text-gray-300 hover:text-amber-400 transition text-xl">
-                ❤️
-              </button>
-              <button className="text-gray-300 hover:text-amber-400 transition text-xl">
-                🛒
-              </button>
-              <Link
-                href="/auth/login"
-                className="text-gray-300 hover:text-amber-400 transition font-semibold text-sm"
-              >
+              <button className="text-gray-300 hover:text-amber-400 text-xl">❤️</button>
+              <button className="text-gray-300 hover:text-amber-400 text-xl">🛒</button>
+              <Link href="/auth/login" className="text-gray-300 hover:text-amber-400 font-semibold text-sm">
                 👤 Hesap
               </Link>
             </div>
@@ -178,9 +170,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
           {categories.map((category) => (
             <Link key={category.id} href={`/${category.slug}`}>
-              <div
-                className={`bg-gradient-to-br ${category.color} rounded-xl p-8 cursor-pointer hover:shadow-2xl hover:scale-105 transition duration-300 h-full border border-gray-700 hover:border-amber-400`}
-              >
+              <div className={`bg-gradient-to-br ${category.color} rounded-xl p-8 cursor-pointer hover:shadow-2xl hover:scale-105 transition duration-300 h-full border border-gray-700 hover:border-amber-400`}>
                 <div className="text-5xl mb-4">{category.icon}</div>
                 <h3 className="text-2xl font-bold text-white mb-2">{category.name}</h3>
                 <p className="text-gray-100 text-sm">{category.description}</p>
@@ -188,6 +178,28 @@ export default function Home() {
             </Link>
           ))}
         </div>
+
+        {/* Features Section */}
+        <section className="bg-gray-800 rounded-xl p-12 mb-20 border border-gray-700">
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">Neden Senlik?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="text-4xl mb-4">🔒</div>
+              <h3 className="text-xl font-bold text-white mb-2">Güvenilir</h3>
+              <p className="text-gray-300">Tüm işlemleriniz güvenli ve korumalı</p>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl mb-4">⚡</div>
+              <h3 className="text-xl font-bold text-white mb-2">Hızlı</h3>
+              <p className="text-gray-300">İhtiyacınız olan her şeyi anında bulun</p>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl mb-4">🌟</div>
+              <h3 className="text-xl font-bold text-white mb-2">Kaliteli</h3>
+              <p className="text-gray-300">En iyi ürün ve hizmet seçenekleri</p>
+            </div>
+          </div>
+        </section>
 
         {/* CTA Section */}
         <section className="text-center">
