@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import StockTracker from './components/StockTracker';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -63,7 +62,7 @@ export default function Home() {
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-6 text-sm">
               <Link href="/" className="text-white hover:text-amber-400 transition">
                 Ana Sayfa
               </Link>
@@ -75,6 +74,9 @@ export default function Home() {
               </Link>
               <Link href="/business" className="text-gray-300 hover:text-amber-400 transition">
                 Business
+              </Link>
+              <Link href="/family" className="text-gray-300 hover:text-amber-400 transition">
+                Aile & Ev
               </Link>
               <Link href="/valuables" className="text-gray-300 hover:text-amber-400 transition">
                 Değerli Varlıklar
@@ -124,6 +126,9 @@ export default function Home() {
               <Link href="/business" className="block text-gray-300 hover:text-amber-400 py-2">
                 Business
               </Link>
+              <Link href="/family" className="block text-gray-300 hover:text-amber-400 py-2">
+                Aile & Ev
+              </Link>
               <Link href="/valuables" className="block text-gray-300 hover:text-amber-400 py-2">
                 Değerli Varlıklar
               </Link>
@@ -146,14 +151,14 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            <span className="text-white">Senlik'e Katılın</span>
+            <span className="text-white">Sizin zamanınızı alan işleri biz hallederiz.</span>
           </h1>
           <p className="text-xl text-gray-300 mb-8">
-            Hayatın, ticaretin ve hizmetlerin yeni merkezi
+            Günlük hayatınızda, evinizde, işinizde veya alışverişinizde yetişemediğiniz işleri tek yerden yönetin.
           </p>
 
           {/* Search Bar */}
-          <div className="max-w-2xl mx-auto mb-8">
+          <div className="max-w-2xl mx-auto mb-16">
             <div className="relative">
               <input
                 type="text"
@@ -168,9 +173,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {/* Stock Tracker */}
-        <StockTracker />
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
