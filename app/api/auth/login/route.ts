@@ -25,7 +25,14 @@ export async function POST(request: NextRequest) {
     }
 
     const token = createToken(user.id, user.email, user.role);
-    return NextResponse.json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role } }, { status: 200 });
+
+    const response = NextResponse.json({
+      token,
+      user: { id: user.id, name: user.name, email: user.email, role: user.role },
+    });
+
+    response.cookies.set('token', token, { httpOnly: true, secure: true, sameSite: 'lax' });
+    return response;
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json({ error: 'Sunucu hatası' }, { status: 500 });
