@@ -8,46 +8,11 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const categories = [
-    {
-      id: 1,
-      name: 'Pazaryeri',
-      description: 'Elektronik, Teknoloji, Moda, Aksesuar',
-      icon: '🛍️',
-      slug: 'marketplace',
-      color: 'from-blue-600 to-blue-800',
-    },
-    {
-      id: 2,
-      name: 'Hizmetler',
-      description: 'Temizlik, Teknik Servis, Montaj',
-      icon: '🔧',
-      slug: 'services',
-      color: 'from-green-600 to-green-800',
-    },
-    {
-      id: 3,
-      name: 'Business',
-      description: 'B2B Ticaret, Tedarikçi Bulma',
-      icon: '💼',
-      slug: 'business',
-      color: 'from-purple-600 to-purple-800',
-    },
-    {
-      id: 4,
-      name: 'Aile & Ev',
-      description: 'Ev Bakımı, Operasyonel Destek',
-      icon: '🏠',
-      slug: 'family',
-      color: 'from-yellow-600 to-yellow-800',
-    },
-    {
-      id: 5,
-      name: 'Değerli Varlıklar',
-      description: 'Altın, Gümüş, Kıymetli Materyaller',
-      icon: '💎',
-      slug: 'valuables',
-      color: 'from-amber-600 to-amber-800',
-    },
+    { id: 1, name: 'Pazaryeri', description: 'Elektronik, Teknoloji, Moda, Aksesuar', icon: '🛍️', slug: 'marketplace', color: 'from-blue-600 to-blue-800' },
+    { id: 2, name: 'Hizmetler', description: 'Temizlik, Teknik Servis, Montaj', icon: '🔧', slug: 'services', color: 'from-green-600 to-green-800' },
+    { id: 3, name: 'Business', description: 'B2B Ticaret, Tedarikçi Bulma', icon: '💼', slug: 'business', color: 'from-purple-600 to-purple-800' },
+    { id: 4, name: 'Aile & Ev', description: 'Ev Bakımı, Operasyonel Destek', icon: '🏠', slug: 'family', color: 'from-yellow-600 to-yellow-800' },
+    { id: 5, name: 'Değerli Varlıklar', description: 'Altın, Gümüş, Kıymetli Materyaller', icon: '💎', slug: 'valuables', color: 'from-amber-600 to-amber-800' },
   ];
 
   return (
@@ -62,27 +27,12 @@ export default function Home() {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-6 text-sm">
-              <Link href="/" className="text-white hover:text-amber-400 transition">
-                Ana Sayfa
-              </Link>
-              <Link href="/marketplace" className="text-gray-300 hover:text-amber-400 transition">
-                Pazaryeri
-              </Link>
-              <Link href="/services" className="text-gray-300 hover:text-amber-400 transition">
-                Hizmetler
-              </Link>
-              <Link href="/business" className="text-gray-300 hover:text-amber-400 transition">
-                Business
-              </Link>
-              <Link href="/family" className="text-gray-300 hover:text-amber-400 transition">
-                Aile & Ev
-              </Link>
-              <Link href="/valuables" className="text-gray-300 hover:text-amber-400 transition">
-                Değerli Varlıklar
-              </Link>
-              <Link href="/admin" className="text-gray-300 hover:text-amber-400 transition">
-                Admin
-              </Link>
+              <Link href="/" className="text-white hover:text-amber-400 transition">Ana Sayfa</Link>
+              <Link href="/marketplace" className="text-gray-300 hover:text-amber-400 transition">Pazaryeri</Link>
+              <Link href="/services" className="text-gray-300 hover:text-amber-400 transition">Hizmetler</Link>
+              <Link href="/business" className="text-gray-300 hover:text-amber-400 transition">Business</Link>
+              <Link href="/family" className="text-gray-300 hover:text-amber-400 transition">Aile & Ev</Link>
+              <Link href="/valuables" className="text-gray-300 hover:text-amber-400 transition">Değerli Varlıklar</Link>
             </div>
 
             {/* Right Icons */}
@@ -95,10 +45,7 @@ export default function Home() {
             </div>
 
             {/* Mobile Hamburger */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-white text-2xl"
-            >
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-white text-2xl">
               {mobileMenuOpen ? '✕' : '☰'}
             </button>
           </div>
@@ -106,34 +53,15 @@ export default function Home() {
           {/* Mobile Menu */}
           {mobileMenuOpen && (
             <div className="md:hidden bg-gray-800 border-t border-gray-700 py-4 space-y-3">
-              <Link href="/" className="block text-white hover:text-amber-400 py-2">
-                Ana Sayfa
-              </Link>
-              <Link href="/marketplace" className="block text-gray-300 hover:text-amber-400 py-2">
-                Pazaryeri
-              </Link>
-              <Link href="/services" className="block text-gray-300 hover:text-amber-400 py-2">
-                Hizmetler
-              </Link>
-              <Link href="/business" className="block text-gray-300 hover:text-amber-400 py-2">
-                Business
-              </Link>
-              <Link href="/family" className="block text-gray-300 hover:text-amber-400 py-2">
-                Aile & Ev
-              </Link>
-              <Link href="/valuables" className="block text-gray-300 hover:text-amber-400 py-2">
-                Değerli Varlıklar
-              </Link>
-              <Link href="/admin" className="block text-gray-300 hover:text-amber-400 py-2">
-                Admin Panel
-              </Link>
+              <Link href="/" className="block text-white hover:text-amber-400 py-2">Ana Sayfa</Link>
+              <Link href="/marketplace" className="block text-gray-300 hover:text-amber-400 py-2">Pazaryeri</Link>
+              <Link href="/services" className="block text-gray-300 hover:text-amber-400 py-2">Hizmetler</Link>
+              <Link href="/business" className="block text-gray-300 hover:text-amber-400 py-2">Business</Link>
+              <Link href="/family" className="block text-gray-300 hover:text-amber-400 py-2">Aile & Ev</Link>
+              <Link href="/valuables" className="block text-gray-300 hover:text-amber-400 py-2">Değerli Varlıklar</Link>
               <hr className="border-gray-700" />
-              <Link href="/auth/login" className="block text-amber-400 font-bold py-2">
-                👤 Giriş Yap
-              </Link>
-              <Link href="/auth/register" className="block text-amber-400 font-bold py-2">
-                Kayıt Ol
-              </Link>
+              <Link href="/auth/login" className="block text-amber-400 font-bold py-2">👤 Giriş Yap</Link>
+              <Link href="/auth/register" className="block text-amber-400 font-bold py-2">Kayıt Ol</Link>
             </div>
           )}
         </div>

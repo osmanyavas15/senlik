@@ -4,116 +4,101 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-export default function LoginPage() {
+export default function Login() {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
 
     try {
-      if (!formData.email.includes('@')) throw new Error('Geçerli bir email girin');
-      if (!formData.password) throw new Error('Şifre gerekli');
-
-      const response = await fetch('/api/auth/login', {
+      const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
+      const data = await res.json();
 
-      if (!response.ok) throw new Error(data.error || 'Giriş başarısız');
-
-      localStorage.setItem('token', data.token);
-
-      if (data.user.role === 'admin') {
-        router.push('/admin');
-      } else if (data.user.role === 'seller') {
-        router.push('/seller');
-      } else {
+      if (res.ok) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
         router.push('/dashboard');
+      } else {
+        setError(data.error || 'Giriş başarısız');
       }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Bir hata oluştu');
+    } catch {
+      setError('Bağlantı hatası');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center px-4 py-8">
-      <div className="max-w-md w-full bg-gray-800 rounded-lg border border-gray-700 p-8">
-        <h1 className="text-3xl font-bold text-white mb-2 text-center">Senlik</h1>
-        <p className="text-gray-400 text-center mb-8">Hesabınıza Giriş Yapın</p>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center p-4">
+      <div className="bg-slate-800 rounded-2xl p-8 max-w-md w-full border border-slate-700 shadow-2xl">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent mb-2">
+            Senlik
+          </h1>
+          <p className="text-gray-400">Hesabınıza giriş yapın</p>
+        </div>
 
         {error && (
-          <div className="mb-4 bg-red-900 border border-red-700 text-red-100 px-4 py-3 rounded-lg text-sm">
-            ✗ {error}
+          <div className="bg-red-600 text-white p-4 rounded-lg mb-6 text-center">
+            {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleLogin} className="space-y-5">
           <div>
-            <label className="block text-sm font-semibold text-gray-300 mb-2">
-              Email *
-            </label>
+            <label className="block text-gray-300 mb-2">Email</label>
             <input
               type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="osman@example.com"
-              className="w-full px-4 py-2 bg-gray-700 border border-gray-600 text-white rounded-lg focus:border-amber-500 focus:outline-none placeholder-gray-500"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
+              className="w-full bg-slate-700 text-white px-4 py-3 rounded-lg border border-slate-600 focus:border-amber-500 focus:outline-none"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-300 mb-2">
-              Şifre *
-            </label>
+            <label className="block text-gray-300 mb-2">Şifre</label>
             <input
               type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="••••••"
-              className="w-full px-4 py-2 bg-gray-700 border border-gray-600 text-white rounded-lg focus:border-amber-500 focus:outline-none placeholder-gray-500"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
+              className="w-full bg-slate-700 text-white px-4 py-3 rounded-lg border border-slate-600 focus:border-amber-500 focus:outline-none"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-amber-500 hover:bg-amber-600 disabled:bg-gray-600 text-white font-bold py-2 rounded-lg transition mt-6"
+            className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-3 rounded-lg transition disabled:opacity-50"
           >
-            {loading ? 'Giriş Yapılıyor...' : 'Giriş Yap'}
+            {loading ? 'Giriş yapılıyor...' : 'Giriş Yap'}
           </button>
         </form>
 
-        <p className="text-gray-400 text-center mt-6">
+        <p className="text-center text-gray-400 mt-6">
           Hesabınız yok mu?{' '}
-          <Link href="/auth/register" className="text-amber-400 hover:text-amber-300 font-semibold">
+          <Link href="/auth/register" className="text-amber-400 font-bold hover:text-amber-500">
             Kayıt Olun
           </Link>
         </p>
+
+        <div className="text-center mt-4">
+          <Link href="/" className="text-gray-500 hover:text-gray-400 text-sm">
+            ← Ana Sayfaya Dön
+          </Link>
+        </div>
       </div>
     </div>
   );
